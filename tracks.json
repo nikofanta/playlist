@@ -1,12 +1,12 @@
 [
   {
     "title": "San Carlo",
-    "audio": "https://drive.google.com/uc?export=download&id=1Wx3l3LFc4M3XKilobl9vPsS4QFfQldK4",
-    "cover": "https://raw.githubusercontent.com/TUO_USER/TUO_REPO/main/covers/cover1.jpg"
+    "audio": "https://drive.google.com/uc?export=download&id=1Wx3l3LFc4M3XKilobl9vPsS4QFfQldK4&confirm=t",
+    "cover": "https://raw.githubusercontent.com/TUO_USER/TUO_REPO/main/covers/sancarlo.jpg"
   },
   {
     "title": "Una Gatta",
-    "audio": "https://drive.google.com/uc?export=download&id=1NRI3cx-cMoymE3CINGPToZG-Jfxg1RZQ",
-    "cover": "https://raw.githubusercontent.com/TUO_USER/TUO_REPO/main/covers/cover2.jpg"
+    "audio": "https://drive.google.com/uc?export=download&id=1NRI3cx-cMoymE3CINGPToZG-Jfxg1RZQ&confirm=t",
+    "cover": "https://raw.githubusercontent.com/TUO_USER/TUO_REPO/main/covers/unagatta.jpg"
   }
 ]
