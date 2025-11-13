@@ -34,7 +34,7 @@ function loadTrack(index, autoplay = true) {
   currentTitle.textContent = track.title;
   currentCover.src = track.cover;
 
-  // pulsante download
+  // Pulsante download
   downloadBtn.onclick = () => {
     window.open(track.audio, "_blank");
   };
@@ -55,23 +55,29 @@ audio.addEventListener("ended", () => {
 // Carica i brani
 loadTracks();
 
-/* --- AUDIO REACTIVE WAVES (LIGHT VERSION) --- */
-let audioContext, analyzer, source;
+/* --- AUDIO REACTIVE WAVES (SAFE VERSION) --- */
+let audioContext, analyzer, sourceNode;
 let waveElement = document.querySelector(".waves path");
 
-function initAudioAnalyzer() {
+function initAudioContext() {
   if (!audioContext) {
     audioContext = new AudioContext();
     analyzer = audioContext.createAnalyser();
-    analyzer.fftSize = 64;
+    analyzer.fftSize = 64; // leggerissimo
     analyzer.smoothingTimeConstant = 0.7;
   }
+}
 
-  source = audioContext.createMediaElementSource(audio);
-  source.connect(analyzer);
+function connectAudio() {
+  // Disconnetti il vecchio nodo se esiste
+  try {
+    if (sourceNode) sourceNode.disconnect();
+  } catch {}
+
+  // Crea un nuovo MediaElementSource per ogni traccia
+  sourceNode = audioContext.createMediaElementSource(audio);
+  sourceNode.connect(analyzer);
   analyzer.connect(audioContext.destination);
-
-  startReactiveAnimation();
 }
 
 function startReactiveAnimation() {
@@ -82,9 +88,9 @@ function startReactiveAnimation() {
 
     let avg = 0;
     for (let i = 0; i < data.length; i++) avg += data[i];
-    avg = avg / data.length;
+    avg /= data.length;
 
-    let intensity = avg / 255;
+    const intensity = avg / 255;
 
     const scale = 1 + intensity * 0.08;
     const opacity = 0.4 + intensity * 0.4;
@@ -101,7 +107,9 @@ function startReactiveAnimation() {
 }
 
 // Avvia l'analizzatore al primo play
-audio.addEventListener("play", () => {
-  if (audioContext && audioContext.state === "running") return;
-  initAudioAnalyzer();
+audio.addEventListener("play", async () => {
+  initAudioContext();
+  await audioContext.resume();
+  connectAudio();
+  startReactiveAnimation();
 });
