@@ -39,11 +39,14 @@ function loadTrack(index, autoplay = true) {
     window.open(track.audio, "_blank");
   };
 
+  // aggiorna evidenziazione della playlist
   [...listContainer.children].forEach((li, i) => {
     li.classList.toggle("active", i === index);
   });
 
-  if (autoplay) audio.play().catch(() => {});
+  if (autoplay) {
+    audio.play().catch(() => {});
+  }
 }
 
 audio.addEventListener("ended", () => {
@@ -52,64 +55,5 @@ audio.addEventListener("ended", () => {
   loadTrack(next, true);
 });
 
-// Carica i brani
+// Avvia caricamento iniziale
 loadTracks();
-
-/* --- AUDIO REACTIVE WAVES (SAFE VERSION) --- */
-let audioContext, analyzer, sourceNode;
-let waveElement = document.querySelector(".waves path");
-
-function initAudioContext() {
-  if (!audioContext) {
-    audioContext = new AudioContext();
-    analyzer = audioContext.createAnalyser();
-    analyzer.fftSize = 64; // leggerissimo
-    analyzer.smoothingTimeConstant = 0.7;
-  }
-}
-
-function connectAudio() {
-  // Disconnetti il vecchio nodo se esiste
-  try {
-    if (sourceNode) sourceNode.disconnect();
-  } catch {}
-
-  // Crea un nuovo MediaElementSource per ogni traccia
-  sourceNode = audioContext.createMediaElementSource(audio);
-  sourceNode.connect(analyzer);
-  analyzer.connect(audioContext.destination);
-}
-
-function startReactiveAnimation() {
-  const data = new Uint8Array(analyzer.frequencyBinCount);
-
-  function update() {
-    analyzer.getByteFrequencyData(data);
-
-    let avg = 0;
-    for (let i = 0; i < data.length; i++) avg += data[i];
-    avg /= data.length;
-
-    const intensity = avg / 255;
-
-    const scale = 1 + intensity * 0.08;
-    const opacity = 0.4 + intensity * 0.4;
-
-    if (waveElement) {
-      waveElement.style.transform = `scale(${scale})`;
-      waveElement.style.opacity = opacity;
-    }
-
-    requestAnimationFrame(update);
-  }
-
-  update();
-}
-
-// Avvia l'analizzatore al primo play
-audio.addEventListener("play", async () => {
-  initAudioContext();
-  await audioContext.resume();
-  connectAudio();
-  startReactiveAnimation();
-});
