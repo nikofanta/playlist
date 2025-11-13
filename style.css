@@ -1,3 +1,4 @@
+/* --- BASE --- */
 body {
   margin: 0;
   padding: 20px;
@@ -11,20 +12,28 @@ body {
   margin: auto;
 }
 
+/* --- TITOLO PRINCIPALE --- */
 h1 {
   text-align: center;
-  color: #1DB954; /* verde Spotify */
+  color: #e38b1f; /* arancione delle cover */
+  font-size: 2.2em;
+  margin-bottom: 25px;
 }
 
+/* --- BLOCCO DELLA CANZONE CORRENTE --- */
 #currentTrackContainer {
   display: flex;
-  align-items: center;
-  margin: 20px 0;
+  align-items: flex-start;
+  margin: 30px 0;
   background: #181818;
-  padding: 15px;
-  border-radius: 10px;
+  padding: 25px;
+  border-radius: 12px;
+
+  /* Spazio tra cover e info */
+  gap: 25px;
 }
 
+/* --- COVER --- */
 .cover-wrapper {
   position: relative;
   width: 120px;
@@ -38,7 +47,7 @@ h1 {
   object-fit: cover;
 }
 
-/* ONDE RADIO ANIMATE */
+/* --- ONDE ANIMATE (SEMPRE ARANCIONI) --- */
 .waves-overlay {
   position: absolute;
   top: 0;
@@ -57,7 +66,7 @@ h1 {
   position: absolute;
   top: -50%;
   left: -50%;
-  stroke: #1DB954;
+  stroke: #e38b1f; /* arancione */
   stroke-width: 8;
   fill: none;
   opacity: 0.7;
@@ -70,16 +79,20 @@ h1 {
   100% { transform: translateX(0) scale(1); }
 }
 
+/* --- TITOLO DELLA CANZONE CORRENTE --- */
 #currentTitle {
-  font-size: 1.4em;
-  margin: 0;
+  font-size: 1.7em;
+  margin-top: 10px;     /* più spazio sopra */
+  margin-bottom: 15px;  /* spazio tra titolo e bottone download */
 }
 
+/* --- PLAYER AUDIO --- */
 audio {
   width: 100%;
-  margin: 10px 0 30px;
+  margin: 20px 0 35px;
 }
 
+/* --- LISTA BRANI --- */
 ul {
   list-style: none;
   padding: 0;
@@ -97,11 +110,11 @@ li {
 }
 
 li:hover {
-  background: #282828;
+  background: #2a2a2a;
 }
 
 li.active {
-  background: #1DB954;
+  background: #e38b1f;  /* evidenza arancione */
   color: #000;
 }
 
@@ -113,23 +126,10 @@ li img {
   object-fit: cover;
 }
 
-/*--- Bottone Download ---*/
+/* --- BOTTONE DOWNLOAD --- */
 .download-btn {
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 10px 18px;
-  background: #1DB954;
-  color: #000;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s, transform 0.1s;
-}
+  background: #e38b1f; /* arancione*
 
-.download-btn:hover {
-  background: #1ed760;
-}
 
-.download-btn:active {
-  transform: scale(0.96);
-}
