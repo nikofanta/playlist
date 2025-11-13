@@ -8,6 +8,17 @@
     "title": "Una Gatta",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/unagatta.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/unagatta.jpg"
+  },
+  {
+    "title": "Sapore di Indonesia",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/saporediindonesia.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/saporediindonesia.jpg"
+  },
+  {
+    "title": "Da Roma a Dubai",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/daromaadubai.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/daromaadubai.jpg"
   }
 ]
+
 
