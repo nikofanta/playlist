@@ -25,6 +25,11 @@
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/summercontest.jpg"
   },
   {
+    "title": "Summer Contest - bis",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/summercontest2.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/summercontest.jpg"
+  },
+  {
     "title": "A Faraway Dream",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/afarawaydream.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/afarawaydream.jpg"
@@ -33,8 +38,29 @@
     "title": "Sogno Lontano",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/sognolontano.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/sognolontano.jpg"
+  },
+  {
+    "title": "Carol for Matteo",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/carolformatteo.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/carolformatteo.jpg"
+  },
+  {
+    "title": "Dream in hte Jungle",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/dreaminthejungle.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/dreaminthejungle.jpg"
+  },
+  {
+    "title": "E la Canzone che ti dice",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/elacanzonechetidice.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/elacanzonechetidice.jpg"
+  },
+  {
+    "title": "Er Rugantino De Milan",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/errugantinodemilan.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/errugantinodemilan.jpg"
   }
 ]
+
 
 
 
