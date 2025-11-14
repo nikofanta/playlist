@@ -23,8 +23,19 @@
     "title": "Summer Contest",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/summercontest.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/summercontest.jpg"
+  },
+  {
+    "title": "A Faraway Dream",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/afarawaydream.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/afarawaydream.jpg"
+  },
+  {
+    "title": "Sogno Lontano",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/sognolontano.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/sognolontano.jpg"
   }
 ]
+
 
 
 
