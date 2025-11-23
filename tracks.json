@@ -66,8 +66,20 @@
     "title": "Jungle Tango",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/jungletango.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/jungletango.png"
+  },
+  {
+    "title": "Amici Di Roma",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/amicidiroma.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/amicidiroma.png"
+  },
+  {
+    "title": "Amici Di Roma",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/amicidiromastornello.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/amicidiromastornello.png",
+    "isDraft": true
   }
 ]
+
 
 
 
