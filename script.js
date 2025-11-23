@@ -9,7 +9,11 @@ const statusBar = document.getElementById("statusBar");
 const statusText = document.getElementById("statusText");
 const spinner = document.getElementById("spinner");
 
-let tracks = [];
+// Draft toggle
+const showDraftsChk = document.getElementById("showDraftsChk");
+
+let allTracks = [];       // tutte le track dal JSON
+let visibleTracks = [];   // quelle visibili in base al toggle
 let currentIndex = 0;
 
 function setStatus(msg, mode = "ok", spinning = false) {
@@ -22,20 +26,49 @@ async function loadTracks() {
   setStatus("Caricamento playlist...", "loading", true);
 
   const response = await fetch("tracks.json");
-  tracks = await response.json();
-  renderList();
-  loadTrack(0, false);
+  allTracks = await response.json();
+
+  applyFilterAndRender();
 
   setStatus("Pronto", "ok", false);
 }
 
+function applyFilterAndRender() {
+  const showDrafts = showDraftsChk.checked;
+
+  // default isDraft = false se manca
+  visibleTracks = allTracks.filter(t => showDrafts || !(t.isDraft === true));
+
+  renderList();
+
+  if (visibleTracks.length > 0) {
+    loadTrack(0, false);
+  } else {
+    // nessuna canzone visibile
+    audio.src = "";
+    currentTitle.textContent = "";
+    currentCover.src = "";
+    setStatus("Nessun brano disponibile", "ok", false);
+  }
+}
+
 function renderList() {
-  tracks.forEach((track, index) => {
+  listContainer.innerHTML = ""; // reset
+
+  visibleTracks.forEach((track, index) => {
     const li = document.createElement("li");
+
+    const isDraft = track.isDraft === true;
+    if (isDraft) li.classList.add("draft");
+
     li.innerHTML = `
-      <img src="${track.cover}">
+      <div class="thumb ${isDraft ? "draft-thumb" : ""}">
+        <img src="${track.cover}" alt="cover">
+        ${isDraft ? '<div class="draft-mask"></div>' : ""}
+      </div>
       <span>${track.title}</span>
     `;
+
     li.addEventListener("click", () => loadTrack(index, true));
     listContainer.appendChild(li);
   });
@@ -43,7 +76,7 @@ function renderList() {
 
 function loadTrack(index, autoplay = true) {
   currentIndex = index;
-  const track = tracks[index];
+  const track = visibleTracks[index];
 
   // UI brano corrente
   audio.src = track.audio;
@@ -61,54 +94,51 @@ function loadTrack(index, autoplay = true) {
   // stato iniziale
   setStatus("Caricamento brano...", "loading", true);
 
-  if (autoplay) {
-    audio.play().catch(() => {});
-  }
+  if (autoplay) audio.play().catch(() => {});
 }
 
-// autoplay next
+// autoplay next (solo tra i visibili)
 audio.addEventListener("ended", () => {
   let next = currentIndex + 1;
-  if (next >= tracks.length) next = 0;
+  if (next >= visibleTracks.length) next = 0;
   loadTrack(next, true);
 });
 
 /* --- EVENTI DI CARICAMENTO / BUFFER --- */
-
-// Inizia download del file
 audio.addEventListener("loadstart", () => {
   setStatus("Caricamento brano...", "loading", true);
 });
 
-// Metadata ricevuti (durata ecc.)
 audio.addEventListener("loadedmetadata", () => {
   setStatus("Quasi pronto...", "loading", true);
 });
 
-// Abbastanza dati per partire
 audio.addEventListener("canplay", () => {
   setStatus("Pronto per riprodurre", "ok", false);
 });
 
-// Riproduzione partita
 audio.addEventListener("playing", () => {
   setStatus("In riproduzione", "ok", false);
 });
 
-// Buffering durante play (connessione lenta)
 audio.addEventListener("waiting", () => {
   setStatus("Buffering... connessione lenta", "buffering", true);
 });
 
-// Stream bloccato/fermo
 audio.addEventListener("stalled", () => {
   setStatus("Download rallentato... attendo rete", "buffering", true);
 });
 
-// Errore reale di rete/file
 audio.addEventListener("error", () => {
   setStatus("Errore nel caricamento del brano", "error", false);
 });
 
-// Avvio
+// quando cambi toggle rifai lista
+showDraftsChk.addEventListener("change", () => {
+  applyFilterAndRender();
+});
+
+// avvio
 loadTracks();
+
+
