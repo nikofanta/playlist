@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <!-- [1] HEAD / META -->
   <meta charset="UTF-8">
   <title>Playlist – Dome</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <!-- [2] CONTAINER PRINCIPALE -->
   <div class="container">
     <h1>Playlist di Dome</h1>
 
+    <!-- [3] BLOCCO CANZONE CORRENTE -->
     <div id="currentTrackContainer">
+
+      <!-- [3.1] COVER + ONDE -->
       <div class="cover-wrapper">
         <img id="currentCover" src="" alt="Cover">
 
@@ -21,21 +27,23 @@
         </div>
       </div>
 
+      <!-- [3.2] INFO + DOWNLOAD -->
       <div class="info">
         <h2 id="currentTitle"></h2>
         <button id="downloadBtn" class="download-btn">Download MP3</button>
       </div>
     </div>
 
+    <!-- [4] PLAYER AUDIO -->
     <audio id="audioPlayer" controls></audio>
 
-    <!-- Status bar per loading/buffering -->
+    <!-- [5] STATUS BAR (loading/buffering) -->
     <div id="statusBar" class="status-bar">
       <div class="spinner" id="spinner"></div>
       <span id="statusText">Pronto</span>
     </div>
 
-    <!-- Toggle Drafts -->
+    <!-- [6] TOGGLE DRAFTS -->
     <div class="draft-toggle">
       <label>
         <input type="checkbox" id="showDraftsChk">
@@ -43,11 +51,15 @@
       </label>
     </div>
 
+    <!-- [7] PLAYLIST -->
     <h3>Brani</h3>
     <ul id="trackList"></ul>
   </div>
 
+  <!-- [8] SCRIPT -->
   <script src="script.js"></script>
 </body>
 </html>
+
+
 
