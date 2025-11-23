@@ -2,7 +2,8 @@
   {
     "title": "San Carlo",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/sancarlo.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/sancarlo.jpg"
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/sancarlo.jpg",
+    "isDraft": true
   },
   {
     "title": "\"Una\" Gatta",
@@ -20,12 +21,13 @@
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/daromaadubai.jpg"
   },
   {
-    "title": "Summer Contest",
+    "title": "Summer Contest - remaster",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/summercontest.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/summercontest.jpg"
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/summercontest.jpg",
+    "isDraft": true
   },
   {
-    "title": "Summer Contest - bis",
+    "title": "Summer Contest",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/summercontest2.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/summercontest.jpg"
   },
@@ -47,7 +49,8 @@
   {
     "title": "Dream in the Jungle",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/dreaminthejungle.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/dreaminthejungle.jpg"
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/dreaminthejungle.jpg",
+    "isDraft": true
   },
   {
     "title": "E la Canzone che ti dice",
@@ -58,8 +61,14 @@
     "title": "Er Rugantino De Milan",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/errugantinodemilan.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/errugantinodemilan.jpg"
+  },
+  {
+    "title": "Jungle Tango",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/jungletango.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/jungletango.jpg"
   }
 ]
+
 
 
 
