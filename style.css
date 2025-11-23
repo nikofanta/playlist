@@ -28,9 +28,7 @@ h1 {
   background: #181818;
   padding: 25px;
   border-radius: 12px;
-
-  /* Spazio tra cover e info */
-  gap: 25px;
+  gap: 25px; /* spazio tra cover e info */
 }
 
 /* --- COVER --- */
@@ -47,7 +45,7 @@ h1 {
   object-fit: cover;
 }
 
-/* --- ONDE ANIMATE (SEMPRE ARANCIONI) --- */
+/* --- ONDE ANIMATE --- */
 .waves-overlay {
   position: absolute;
   top: 0;
@@ -79,17 +77,55 @@ h1 {
   100% { transform: translateX(0) scale(1); }
 }
 
-/* --- TITOLO DELLA CANZONE CORRENTE --- */
+/* --- TITOLO BRANO CORRENTE --- */
 #currentTitle {
   font-size: 1.7em;
-  margin-top: 10px;     /* più spazio sopra */
-  margin-bottom: 15px;  /* spazio tra titolo e bottone download */
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 /* --- PLAYER AUDIO --- */
 audio {
   width: 100%;
-  margin: 20px 0 35px;
+  margin: 20px 0 10px;
+}
+
+/* --- STATUS BAR / LOADING --- */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95em;
+  color: #ddd;
+  background: #181818;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  min-height: 36px;
+}
+
+.status-bar.ok { color: #cfcfcf; }
+.status-bar.loading { color: #ffac42; }
+.status-bar.buffering { color: #ffac42; }
+.status-bar.error { color: #ff6b6b; }
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-top-color: #e38b1f;  /* arancione */
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+.spinner.show {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* --- LISTA BRANI --- */
@@ -114,7 +150,7 @@ li:hover {
 }
 
 li.active {
-  background: #e38b1f;  /* evidenza arancione */
+  background: #e38b1f;
   color: #000;
 }
 
@@ -130,6 +166,21 @@ li img {
 .download-btn {
   margin-top: 20px;
   padding: 10px 18px;
-  background: #e38b1f; /* arancione*
+  background: #e38b1f;
+  color: #000;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.download-btn:hover {
+  background: #ffac42;
+}
+
+.download-btn:active {
+  transform: scale(0.96);
+}
 
 
