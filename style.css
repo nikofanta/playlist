@@ -1,4 +1,6 @@
-/* --- BASE --- */
+/* =========================================================
+   [1] BASE
+   ========================================================= */
 body {
   margin: 0;
   padding: 20px;
@@ -12,15 +14,19 @@ body {
   margin: auto;
 }
 
-/* --- TITOLO PRINCIPALE --- */
+/* =========================================================
+   [2] TITOLO PRINCIPALE
+   ========================================================= */
 h1 {
   text-align: center;
-  color: #e38b1f; /* arancione delle cover */
+  color: #e38b1f; /* arancione cover */
   font-size: 2.2em;
   margin-bottom: 25px;
 }
 
-/* --- BLOCCO DELLA CANZONE CORRENTE --- */
+/* =========================================================
+   [3] BLOCCO CANZONE CORRENTE
+   ========================================================= */
 #currentTrackContainer {
   display: flex;
   align-items: flex-start;
@@ -28,10 +34,12 @@ h1 {
   background: #181818;
   padding: 25px;
   border-radius: 12px;
-  gap: 25px; /* spazio tra cover e info */
+  gap: 25px;
 }
 
-/* --- COVER --- */
+/* =========================================================
+   [3.1] COVER
+   ========================================================= */
 .cover-wrapper {
   position: relative;
   width: 120px;
@@ -45,7 +53,9 @@ h1 {
   object-fit: cover;
 }
 
-/* --- ONDE ANIMATE --- */
+/* =========================================================
+   [3.2] ONDE ANIMATE
+   ========================================================= */
 .waves-overlay {
   position: absolute;
   top: 0;
@@ -64,7 +74,7 @@ h1 {
   position: absolute;
   top: -50%;
   left: -50%;
-  stroke: #e38b1f; /* arancione */
+  stroke: #e38b1f;         /* arancione */
   stroke-width: 8;
   fill: none;
   opacity: 0.7;
@@ -77,20 +87,26 @@ h1 {
   100% { transform: translateX(0) scale(1); }
 }
 
-/* --- TITOLO BRANO CORRENTE --- */
+/* =========================================================
+   [3.3] TITOLO BRANO CORRENTE
+   ========================================================= */
 #currentTitle {
   font-size: 1.7em;
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
-/* --- PLAYER AUDIO --- */
+/* =========================================================
+   [4] PLAYER AUDIO
+   ========================================================= */
 audio {
   width: 100%;
   margin: 20px 0 10px;
 }
 
-/* --- STATUS BAR / LOADING --- */
+/* =========================================================
+   [5] STATUS BAR / LOADING
+   ========================================================= */
 .status-bar {
   display: flex;
   align-items: center;
@@ -100,7 +116,6 @@ audio {
   background: #181818;
   padding: 8px 12px;
   border-radius: 8px;
-  margin-top: 0px;
   margin-bottom: 20px;
   min-height: 36px;
 }
@@ -114,7 +129,7 @@ audio {
   width: 14px;
   height: 14px;
   border: 2px solid rgba(255,255,255,0.2);
-  border-top-color: #e38b1f;  /* arancione */
+  border-top-color: #e38b1f; 
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   display: none;
@@ -128,7 +143,9 @@ audio {
   to { transform: rotate(360deg); }
 }
 
-/* --- TOGGLE DRAFTS --- */
+/* =========================================================
+   [6] TOGGLE DRAFTS
+   ========================================================= */
 .draft-toggle {
   display: flex;
   justify-content: flex-end;
@@ -140,10 +157,12 @@ audio {
 .draft-toggle input {
   transform: scale(1.1);
   margin-right: 8px;
-  accent-color: #e38b1f; /* arancione */
+  accent-color: #e38b1f;
 }
 
-/* --- LISTA BRANI --- */
+/* =========================================================
+   [7] LISTA BRANI
+   ========================================================= */
 ul {
   list-style: none;
   padding: 0;
@@ -169,7 +188,9 @@ li.active {
   color: #000;
 }
 
-/* --- THUMB COVER IN LISTA --- */
+/* =========================================================
+   [7.1] THUMB COVER IN LISTA
+   ========================================================= */
 .thumb {
   position: relative;
   width: 50px;
@@ -186,12 +207,13 @@ li.active {
   display: block;
 }
 
-/* --- DRAFT: tinta bluastra + maschera trasparente --- */
+/* =========================================================
+   [7.2] DRAFT: TINTA BLUASTRA + MASCHERA
+   ========================================================= */
 li.draft .thumb img {
   filter: hue-rotate(200deg) saturate(1.25) brightness(0.9);
 }
 
-/* overlay blu trasparente */
 .draft-mask {
   position: absolute;
   inset: 0;
@@ -201,7 +223,9 @@ li.draft .thumb img {
   pointer-events: none;
 }
 
-/* --- BOTTONE DOWNLOAD --- */
+/* =========================================================
+   [8] BOTTONE DOWNLOAD
+   ========================================================= */
 .download-btn {
   margin-top: 20px;
   padding: 10px 18px;
@@ -221,6 +245,3 @@ li.draft .thumb img {
 .download-btn:active {
   transform: scale(0.96);
 }
-
-
-
