@@ -128,6 +128,21 @@ audio {
   to { transform: rotate(360deg); }
 }
 
+/* --- TOGGLE DRAFTS --- */
+.draft-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px 0 10px;
+  font-size: 0.95em;
+  color: #ddd;
+}
+
+.draft-toggle input {
+  transform: scale(1.1);
+  margin-right: 8px;
+  accent-color: #e38b1f; /* arancione */
+}
+
 /* --- LISTA BRANI --- */
 ul {
   list-style: none;
@@ -154,12 +169,36 @@ li.active {
   color: #000;
 }
 
-li img {
+/* --- THUMB COVER IN LISTA --- */
+.thumb {
+  position: relative;
   width: 50px;
   height: 50px;
-  border-radius: 6px;
   margin-right: 12px;
+  flex: 0 0 auto;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
   object-fit: cover;
+  display: block;
+}
+
+/* --- DRAFT: tinta bluastra + maschera trasparente --- */
+li.draft .thumb img {
+  filter: hue-rotate(200deg) saturate(1.25) brightness(0.9);
+}
+
+/* overlay blu trasparente */
+.draft-mask {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: rgba(80, 140, 255, 0.35);
+  mix-blend-mode: screen;
+  pointer-events: none;
 }
 
 /* --- BOTTONE DOWNLOAD --- */
@@ -182,5 +221,6 @@ li img {
 .download-btn:active {
   transform: scale(0.96);
 }
+
 
 
