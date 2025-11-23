@@ -7,6 +7,10 @@ const currentTitle = document.getElementById("currentTitle");
 const currentCover = document.getElementById("currentCover");
 const downloadBtn = document.getElementById("downloadBtn");
 
+// Bottoni UI Prev/Next
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
 // Status UI
 const statusBar = document.getElementById("statusBar");
 const statusText = document.getElementById("statusText");
@@ -18,8 +22,8 @@ const showDraftsChk = document.getElementById("showDraftsChk");
 /* =========================================================
    [2] STATO APPLICAZIONE
    ========================================================= */
-let allTracks = [];       // tutte da JSON
-let visibleTracks = [];   // filtrate in base al toggle
+let allTracks = [];
+let visibleTracks = [];
 let currentIndex = 0;
 
 /* =========================================================
@@ -50,8 +54,6 @@ async function loadTracks() {
    ========================================================= */
 function applyFilterAndRender() {
   const showDrafts = showDraftsChk.checked;
-
-  // default isDraft = false se manca
   visibleTracks = allTracks.filter(t => showDrafts || !(t.isDraft === true));
 
   renderList();
@@ -74,7 +76,6 @@ function renderList() {
 
   visibleTracks.forEach((track, index) => {
     const li = document.createElement("li");
-
     const isDraft = track.isDraft === true;
     if (isDraft) li.classList.add("draft");
 
@@ -98,22 +99,18 @@ function loadTrack(index, autoplay = true) {
   currentIndex = index;
   const track = visibleTracks[index];
 
-  // UI brano corrente
   audio.src = track.audio;
   currentTitle.textContent = track.title;
   currentCover.src = track.cover;
 
-  // Pulsante download
   downloadBtn.onclick = () => window.open(track.audio, "_blank");
 
-  // Evidenziazione lista
   [...listContainer.children].forEach((li, i) => {
     li.classList.toggle("active", i === index);
   });
 
   setStatus("Caricamento brano...", "loading", true);
 
-  // ---- [7.1] MEDIA SESSION API (titolo + cover + controlli) ----
   setupMediaSession(track);
 
   if (autoplay) audio.play().catch(() => {});
@@ -136,32 +133,46 @@ function setupMediaSession(track) {
     ]
   });
 
-  // Handlers hardware / auto / notifiche
   navigator.mediaSession.setActionHandler("play", () => audio.play());
   navigator.mediaSession.setActionHandler("pause", () => audio.pause());
-  navigator.mediaSession.setActionHandler("previoustrack", () => {
-    let prev = currentIndex - 1;
-    if (prev < 0) prev = visibleTracks.length - 1;
-    loadTrack(prev, true);
-  });
-  navigator.mediaSession.setActionHandler("nexttrack", () => {
-    let next = currentIndex + 1;
-    if (next >= visibleTracks.length) next = 0;
-    loadTrack(next, true);
-  });
+  navigator.mediaSession.setActionHandler("previoustrack", () => playPrev());
+  navigator.mediaSession.setActionHandler("nexttrack", () => playNext());
 }
 
 /* =========================================================
-   [8] AUTOPLAY NEXT (solo visibili)
+   [8] NAVIGAZIONE PREV/NEXT (riusabile da UI e MediaSession)
    ========================================================= */
-audio.addEventListener("ended", () => {
+function playPrev() {
+  if (visibleTracks.length === 0) return;
+
+  let prev = currentIndex - 1;
+  if (prev < 0) prev = visibleTracks.length - 1;
+  loadTrack(prev, true);
+}
+
+function playNext() {
+  if (visibleTracks.length === 0) return;
+
   let next = currentIndex + 1;
   if (next >= visibleTracks.length) next = 0;
   loadTrack(next, true);
+}
+
+/* =========================================================
+   [8.1] CLICK BOTTONI UI
+   ========================================================= */
+prevBtn.addEventListener("click", playPrev);
+nextBtn.addEventListener("click", playNext);
+
+/* =========================================================
+   [9] AUTOPLAY NEXT
+   ========================================================= */
+audio.addEventListener("ended", () => {
+  playNext();
 });
 
 /* =========================================================
-   [9] EVENTI LOADING / BUFFERING / ERROR
+   [10] EVENTI LOADING / BUFFERING / ERROR
    ========================================================= */
 audio.addEventListener("loadstart", () => {
   setStatus("Caricamento brano...", "loading", true);
@@ -199,13 +210,13 @@ audio.addEventListener("error", () => {
 });
 
 /* =========================================================
-   [10] TOGGLE DRAFTS CHANGE
+   [11] TOGGLE DRAFTS CHANGE
    ========================================================= */
 showDraftsChk.addEventListener("change", () => {
   applyFilterAndRender();
 });
 
 /* =========================================================
-   [11] AVVIO
+   [12] AVVIO
    ========================================================= */
 loadTracks();
