@@ -105,6 +105,37 @@ audio {
 }
 
 /* =========================================================
+   [4.1] CONTROLLI PREV / NEXT
+   ========================================================= */
+.transport {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 6px 0 18px;
+}
+
+.transport-btn {
+  padding: 8px 14px;
+  background: #181818;
+  color: #fff;
+  border: 1px solid #2a2a2a;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s, border 0.2s;
+}
+
+.transport-btn:hover {
+  background: #2a2a2a;
+  border-color: #e38b1f;
+}
+
+.transport-btn:active {
+  transform: scale(0.96);
+}
+
+
+/* =========================================================
    [5] STATUS BAR / LOADING
    ========================================================= */
 .status-bar {
@@ -245,3 +276,4 @@ li.draft .thumb img {
 .download-btn:active {
   transform: scale(0.96);
 }
+
