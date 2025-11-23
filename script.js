@@ -1,3 +1,6 @@
+/* =========================================================
+   [1] RIFERIMENTI DOM
+   ========================================================= */
 const audio = document.getElementById("audioPlayer");
 const listContainer = document.getElementById("trackList");
 const currentTitle = document.getElementById("currentTitle");
@@ -12,16 +15,25 @@ const spinner = document.getElementById("spinner");
 // Draft toggle
 const showDraftsChk = document.getElementById("showDraftsChk");
 
-let allTracks = [];       // tutte le track dal JSON
-let visibleTracks = [];   // quelle visibili in base al toggle
+/* =========================================================
+   [2] STATO APPLICAZIONE
+   ========================================================= */
+let allTracks = [];       // tutte da JSON
+let visibleTracks = [];   // filtrate in base al toggle
 let currentIndex = 0;
 
+/* =========================================================
+   [3] STATUS HELPERS
+   ========================================================= */
 function setStatus(msg, mode = "ok", spinning = false) {
   statusText.textContent = msg;
   statusBar.className = `status-bar ${mode}`;
   spinner.classList.toggle("show", spinning);
 }
 
+/* =========================================================
+   [4] LOAD TRACKS JSON
+   ========================================================= */
 async function loadTracks() {
   setStatus("Caricamento playlist...", "loading", true);
 
@@ -33,6 +45,9 @@ async function loadTracks() {
   setStatus("Pronto", "ok", false);
 }
 
+/* =========================================================
+   [5] FILTRO DRAFT + RENDER
+   ========================================================= */
 function applyFilterAndRender() {
   const showDrafts = showDraftsChk.checked;
 
@@ -44,7 +59,6 @@ function applyFilterAndRender() {
   if (visibleTracks.length > 0) {
     loadTrack(0, false);
   } else {
-    // nessuna canzone visibile
     audio.src = "";
     currentTitle.textContent = "";
     currentCover.src = "";
@@ -52,8 +66,11 @@ function applyFilterAndRender() {
   }
 }
 
+/* =========================================================
+   [6] RENDER LISTA BRANI
+   ========================================================= */
 function renderList() {
-  listContainer.innerHTML = ""; // reset
+  listContainer.innerHTML = "";
 
   visibleTracks.forEach((track, index) => {
     const li = document.createElement("li");
@@ -62,7 +79,7 @@ function renderList() {
     if (isDraft) li.classList.add("draft");
 
     li.innerHTML = `
-      <div class="thumb ${isDraft ? "draft-thumb" : ""}">
+      <div class="thumb">
         <img src="${track.cover}" alt="cover">
         ${isDraft ? '<div class="draft-mask"></div>' : ""}
       </div>
@@ -74,6 +91,9 @@ function renderList() {
   });
 }
 
+/* =========================================================
+   [7] LOAD BRANO + UI + MEDIA SESSION
+   ========================================================= */
 function loadTrack(index, autoplay = true) {
   currentIndex = index;
   const track = visibleTracks[index];
@@ -83,30 +103,69 @@ function loadTrack(index, autoplay = true) {
   currentTitle.textContent = track.title;
   currentCover.src = track.cover;
 
-  // Download
+  // Pulsante download
   downloadBtn.onclick = () => window.open(track.audio, "_blank");
 
-  // evidenziazione lista
+  // Evidenziazione lista
   [...listContainer.children].forEach((li, i) => {
     li.classList.toggle("active", i === index);
   });
 
-  // stato iniziale
   setStatus("Caricamento brano...", "loading", true);
+
+  // ---- [7.1] MEDIA SESSION API (titolo + cover + controlli) ----
+  setupMediaSession(track);
 
   if (autoplay) audio.play().catch(() => {});
 }
 
-// autoplay next (solo tra i visibili)
+/* =========================================================
+   [7.1] MEDIA SESSION API
+   ========================================================= */
+function setupMediaSession(track) {
+  if (!("mediaSession" in navigator)) return;
+
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: track.title,
+    artist: "Dome",
+    album: "Playlist",
+    artwork: [
+      { src: track.cover, sizes: "512x512", type: "image/png" },
+      { src: track.cover, sizes: "256x256", type: "image/png" },
+      { src: track.cover, sizes: "128x128", type: "image/png" }
+    ]
+  });
+
+  // Handlers hardware / auto / notifiche
+  navigator.mediaSession.setActionHandler("play", () => audio.play());
+  navigator.mediaSession.setActionHandler("pause", () => audio.pause());
+  navigator.mediaSession.setActionHandler("previoustrack", () => {
+    let prev = currentIndex - 1;
+    if (prev < 0) prev = visibleTracks.length - 1;
+    loadTrack(prev, true);
+  });
+  navigator.mediaSession.setActionHandler("nexttrack", () => {
+    let next = currentIndex + 1;
+    if (next >= visibleTracks.length) next = 0;
+    loadTrack(next, true);
+  });
+}
+
+/* =========================================================
+   [8] AUTOPLAY NEXT (solo visibili)
+   ========================================================= */
 audio.addEventListener("ended", () => {
   let next = currentIndex + 1;
   if (next >= visibleTracks.length) next = 0;
   loadTrack(next, true);
 });
 
-/* --- EVENTI DI CARICAMENTO / BUFFER --- */
+/* =========================================================
+   [9] EVENTI LOADING / BUFFERING / ERROR
+   ========================================================= */
 audio.addEventListener("loadstart", () => {
   setStatus("Caricamento brano...", "loading", true);
+  if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "none";
 });
 
 audio.addEventListener("loadedmetadata", () => {
@@ -119,6 +178,11 @@ audio.addEventListener("canplay", () => {
 
 audio.addEventListener("playing", () => {
   setStatus("In riproduzione", "ok", false);
+  if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "playing";
+});
+
+audio.addEventListener("pause", () => {
+  if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "paused";
 });
 
 audio.addEventListener("waiting", () => {
@@ -131,14 +195,17 @@ audio.addEventListener("stalled", () => {
 
 audio.addEventListener("error", () => {
   setStatus("Errore nel caricamento del brano", "error", false);
+  if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "none";
 });
 
-// quando cambi toggle rifai lista
+/* =========================================================
+   [10] TOGGLE DRAFTS CHANGE
+   ========================================================= */
 showDraftsChk.addEventListener("change", () => {
   applyFilterAndRender();
 });
 
-// avvio
+/* =========================================================
+   [11] AVVIO
+   ========================================================= */
 loadTracks();
-
-
