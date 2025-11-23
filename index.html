@@ -2,18 +2,18 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>La pl.A.I.list</title>
+  <title>Playlist – Dome</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>La pl.A.I.list</h1>
+    <h1>Playlist di Dome</h1>
 
     <div id="currentTrackContainer">
       <div class="cover-wrapper">
         <img id="currentCover" src="" alt="Cover">
-        
-        <!-- Onde radio + overlay -->
+
+        <!-- Onde radio animate -->
         <div class="waves-overlay">
           <svg class="waves" viewBox="0 0 1200 200" preserveAspectRatio="none">
             <path d="M0 100 Q300 20 600 100 T1200 100" />
@@ -29,6 +29,12 @@
 
     <audio id="audioPlayer" controls></audio>
 
+    <!-- Status bar per loading/buffering -->
+    <div id="statusBar" class="status-bar">
+      <div class="spinner" id="spinner"></div>
+      <span id="statusText">Pronto</span>
+    </div>
+
     <h3>Brani</h3>
     <ul id="trackList"></ul>
   </div>
@@ -36,5 +42,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
