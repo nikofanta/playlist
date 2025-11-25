@@ -292,7 +292,7 @@ function parseLrc(text) {
 }
 
 /* =========================================================
-   [12] LRC: SYNC CON AUDIO (TIMEUPDATE)
+   [12] LRC: SYNC CON AUDIO (prev / current / next)
    ========================================================= */
 audio.addEventListener("timeupdate", () => {
   if (!currentLyrics.length || !currentLyricEl) return;
@@ -310,14 +310,22 @@ audio.addEventListener("timeupdate", () => {
 
   if (idx !== currentLyricIndex) {
     currentLyricIndex = idx;
+
     if (currentLyricIndex === -1) {
-      currentLyricEl.textContent = "";
+      if (prevLyricEl) prevLyricEl.textContent = "";
+      if (currentLyricEl) currentLyricEl.textContent = "";
+      if (nextLyricEl) nextLyricEl.textContent = currentLyrics[0]?.text || "";
     } else {
-      currentLyricEl.textContent = currentLyrics[currentLyricIndex].text;
+      const prevText = currentLyrics[currentLyricIndex - 1]?.text || "";
+      const currText = currentLyrics[currentLyricIndex]?.text || "";
+      const nextText = currentLyrics[currentLyricIndex + 1]?.text || "";
+
+      if (prevLyricEl) prevLyricEl.textContent = prevText;
+      if (currentLyricEl) currentLyricEl.textContent = currText;
+      if (nextLyricEl) nextLyricEl.textContent = nextText;
     }
   }
 });
-
 /* =========================================================
    [13] TOGGLE DRAFTS CHANGE
    ========================================================= */
@@ -329,5 +337,6 @@ showDraftsChk.addEventListener("change", () => {
    [14] AVVIO
    ========================================================= */
 loadTracks();
+
 
 
