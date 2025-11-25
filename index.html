@@ -27,19 +27,26 @@
         </div>
       </div>
 
-      <!-- [3.2] INFO + DOWNLOAD -->
+      <!-- [3.2] INFO + LYRICS -->
       <div class="info">
         <h2 id="currentTitle"></h2>
-        <button id="downloadBtn" class="download-btn">Download MP3</button>
+
+        <!-- [3.2.1] LYRICS CONTAINER -->
+        <div id="lyricsContainer" class="lyrics-container">
+          <div id="currentLyric" class="current-lyric">
+            Testo non disponibile
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- [4] PLAYER AUDIO -->
     <audio id="audioPlayer" controls></audio>
 
-    <!-- [4.1] CONTROLLI UI PREV/NEXT -->
+    <!-- [4.1] CONTROLLI UI PREV/NEXT + DOWNLOAD -->
     <div class="transport">
       <button id="prevBtn" class="transport-btn" aria-label="Previous track">⏮ Prev</button>
+      <button id="downloadBtn" class="transport-btn" aria-label="Download MP3">⬇ Download</button>
       <button id="nextBtn" class="transport-btn" aria-label="Next track">Next ⏭</button>
     </div>
 
@@ -66,7 +73,4 @@
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
 
