@@ -72,16 +72,17 @@
   {
     "title": "Amici Di Roma",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/amicidiroma.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/amicidiroma.png"
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/amicidiroma.png",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/amicidiroma.lrc"
   },
   {
     "title": "Amici Di Roma",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/amicidiromastornello.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/amicidiroma.png",
-    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/amicidiroma.lrc"
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/amicidiroma.png"
     "isDraft": true
   }
 ]
+
 
 
 
