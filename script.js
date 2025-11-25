@@ -22,9 +22,9 @@ const spinner = document.getElementById("spinner");
 const showDraftsChk = document.getElementById("showDraftsChk");
 
 // Lyrics UI (prev / current / next)
-const prevLyricEl = document.getElementById("prevLyric");
-const currentLyricEl = document.getElementById("currentLyric");
-const nextLyricEl = document.getElementById("nextLyric");
+const prevLyricEl = document.getElementById("prevLyric") || { textContent: "" };
+const currentLyricEl = document.getElementById("currentLyric") || { textContent: "" };
+const nextLyricEl = document.getElementById("nextLyric") || { textContent: "" };
 
 /* =========================================================
    [2] STATO APPLICAZIONE
@@ -341,3 +341,4 @@ showDraftsChk.addEventListener("change", () => {
    [14] AVVIO
    ========================================================= */
 loadTracks();
+
