@@ -286,9 +286,8 @@ li.draft .thumb img {
 }
 
 /* =========================================================
-   [8] (NON USATO) BOTTONE DOWNLOAD CLASSICO
+   [8] BOTTONE DOWNLOAD (stile riusato sui transport-btn)
    ========================================================= */
-/* lasciato per compatibilità se in futuro userai altre pagine */
 .download-btn {
   padding: 10px 18px;
   background: #e38b1f;
@@ -307,4 +306,3 @@ li.draft .thumb img {
 .download-btn:active {
   transform: scale(0.96);
 }
-
