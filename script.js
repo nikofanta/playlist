@@ -21,8 +21,10 @@ const spinner = document.getElementById("spinner");
 // Draft toggle
 const showDraftsChk = document.getElementById("showDraftsChk");
 
-// Lyrics UI
+// Lyrics UI (prev / current / next)
+const prevLyricEl = document.getElementById("prevLyric");
 const currentLyricEl = document.getElementById("currentLyric");
+const nextLyricEl = document.getElementById("nextLyric");
 
 /* =========================================================
    [2] STATO APPLICAZIONE
@@ -243,7 +245,10 @@ async function loadLrc(url) {
     if (currentLyrics.length === 0) {
       clearLyrics("Nessun testo valido nel file LRC");
     } else {
-      currentLyricEl.textContent = "Avvia la riproduzione per vedere il testo...";
+      // reset view “pronta”
+      if (prevLyricEl) prevLyricEl.textContent = "";
+      if (nextLyricEl) nextLyricEl.textContent = "";
+      if (currentLyricEl) currentLyricEl.textContent = "Avvia la riproduzione per vedere il testo...";
     }
   } catch (e) {
     clearLyrics("Errore nel caricamento del testo");
@@ -253,6 +258,8 @@ async function loadLrc(url) {
 function clearLyrics(message = "Testo non disponibile") {
   currentLyrics = [];
   currentLyricIndex = -1;
+  if (prevLyricEl) prevLyricEl.textContent = "";
+  if (nextLyricEl) nextLyricEl.textContent = "";
   if (currentLyricEl) currentLyricEl.textContent = message;
 }
 
@@ -261,7 +268,6 @@ function parseLrc(text) {
   currentLyricIndex = -1;
 
   const lines = text.split(/\r?\n/);
-
   const timeRegex = /\[(\d+):(\d+)(?:\.(\d+))?\](.*)/;
 
   for (const line of lines) {
@@ -276,9 +282,7 @@ function parseLrc(text) {
     const fracStr = m[3] || "0";
     let frac = parseInt(fracStr, 10) || 0;
 
-    // LRC tipicamente mm:ss.xx (centesimi)
     let fracSec = fracStr.length === 2 ? frac / 100 : frac / 1000;
-
     const total = min * 60 + sec + fracSec;
     const lyricText = m[4].trim();
 
@@ -287,7 +291,6 @@ function parseLrc(text) {
     }
   }
 
-  // ordina per tempo
   currentLyrics.sort((a, b) => a.time - b.time);
 }
 
@@ -326,6 +329,7 @@ audio.addEventListener("timeupdate", () => {
     }
   }
 });
+
 /* =========================================================
    [13] TOGGLE DRAFTS CHANGE
    ========================================================= */
@@ -337,6 +341,3 @@ showDraftsChk.addEventListener("change", () => {
    [14] AVVIO
    ========================================================= */
 loadTracks();
-
-
-
