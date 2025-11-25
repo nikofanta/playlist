@@ -3,12 +3,14 @@
     "title": "San Carlo",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/sancarlo.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/sancarlo.jpg",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/sancarlo.lrc",
     "isDraft": true
   },
   {
     "title": "\"Una\" Gatta",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/unagatta.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/unagatta.jpg"
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/unagatta.jpg",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/unagatta.lrc"
   },
   {
     "title": "Sapore di Indonesia",
@@ -79,6 +81,7 @@
     "isDraft": true
   }
 ]
+
 
 
 
