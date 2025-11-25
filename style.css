@@ -93,7 +93,26 @@ h1 {
 #currentTitle {
   font-size: 1.7em;
   margin-top: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+}
+
+/* =========================================================
+   [3.4] LYRICS CONTAINER
+   ========================================================= */
+.lyrics-container {
+  background: #151515;
+  border-radius: 8px;
+  padding: 10px 12px;
+  min-height: 56px;
+  max-height: 120px;
+  overflow-y: auto;
+  border: 1px solid #262626;
+}
+
+.current-lyric {
+  font-size: 1.0em;
+  line-height: 1.4;
+  color: #f5f5f5;
 }
 
 /* =========================================================
@@ -105,7 +124,7 @@ audio {
 }
 
 /* =========================================================
-   [4.1] CONTROLLI PREV / NEXT
+   [4.1] CONTROLLI PREV / NEXT / DOWNLOAD
    ========================================================= */
 .transport {
   display: flex;
@@ -122,6 +141,7 @@ audio {
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 0.95em;
   transition: background 0.2s, transform 0.1s, border 0.2s;
 }
 
@@ -133,7 +153,6 @@ audio {
 .transport-btn:active {
   transform: scale(0.96);
 }
-
 
 /* =========================================================
    [5] STATUS BAR / LOADING
@@ -255,10 +274,10 @@ li.draft .thumb img {
 }
 
 /* =========================================================
-   [8] BOTTONE DOWNLOAD
+   [8] (NON USATO) BOTTONE DOWNLOAD CLASSICO
    ========================================================= */
+/* lasciato per compatibilità se in futuro userai altre pagine */
 .download-btn {
-  margin-top: 20px;
   padding: 10px 18px;
   background: #e38b1f;
   color: #000;
@@ -276,4 +295,3 @@ li.draft .thumb img {
 .download-btn:active {
   transform: scale(0.96);
 }
-
