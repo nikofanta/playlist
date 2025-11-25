@@ -5,6 +5,8 @@ const audio = document.getElementById("audioPlayer");
 const listContainer = document.getElementById("trackList");
 const currentTitle = document.getElementById("currentTitle");
 const currentCover = document.getElementById("currentCover");
+
+// Download vicino a Prev/Next
 const downloadBtn = document.getElementById("downloadBtn");
 
 // Bottoni UI Prev/Next
@@ -19,12 +21,19 @@ const spinner = document.getElementById("spinner");
 // Draft toggle
 const showDraftsChk = document.getElementById("showDraftsChk");
 
+// Lyrics UI
+const currentLyricEl = document.getElementById("currentLyric");
+
 /* =========================================================
    [2] STATO APPLICAZIONE
    ========================================================= */
 let allTracks = [];
 let visibleTracks = [];
 let currentIndex = 0;
+
+// stato lyrics
+let currentLyrics = [];        // [{ time: sec, text: string }]
+let currentLyricIndex = -1;
 
 /* =========================================================
    [3] STATUS HELPERS
@@ -64,6 +73,7 @@ function applyFilterAndRender() {
     audio.src = "";
     currentTitle.textContent = "";
     currentCover.src = "";
+    clearLyrics("Nessun brano disponibile");
     setStatus("Nessun brano disponibile", "ok", false);
   }
 }
@@ -93,7 +103,7 @@ function renderList() {
 }
 
 /* =========================================================
-   [7] LOAD BRANO + UI + MEDIA SESSION
+   [7] LOAD BRANO + UI + MEDIA SESSION + LRC
    ========================================================= */
 function loadTrack(index, autoplay = true) {
   currentIndex = index;
@@ -103,15 +113,25 @@ function loadTrack(index, autoplay = true) {
   currentTitle.textContent = track.title;
   currentCover.src = track.cover;
 
+  // Download MP3
   downloadBtn.onclick = () => window.open(track.audio, "_blank");
 
+  // Evidenziazione lista
   [...listContainer.children].forEach((li, i) => {
     li.classList.toggle("active", i === index);
   });
 
   setStatus("Caricamento brano...", "loading", true);
 
+  // Media Session (titolo + cover)
   setupMediaSession(track);
+
+  // Lyrics: se c'è track.lrc → carica; altrimenti pulisci
+  if (track.lrc) {
+    loadLrc(track.lrc);
+  } else {
+    clearLyrics("Testo non disponibile");
+  }
 
   if (autoplay) audio.play().catch(() => {});
 }
@@ -140,7 +160,7 @@ function setupMediaSession(track) {
 }
 
 /* =========================================================
-   [8] NAVIGAZIONE PREV/NEXT (riusabile da UI e MediaSession)
+   [8] NAVIGAZIONE PREV/NEXT (UI + MediaSession)
    ========================================================= */
 function playPrev() {
   if (visibleTracks.length === 0) return;
@@ -158,9 +178,7 @@ function playNext() {
   loadTrack(next, true);
 }
 
-/* =========================================================
-   [8.1] CLICK BOTTONI UI
-   ========================================================= */
+// Click bottoni UI
 prevBtn.addEventListener("click", playPrev);
 nextBtn.addEventListener("click", playNext);
 
@@ -210,13 +228,106 @@ audio.addEventListener("error", () => {
 });
 
 /* =========================================================
-   [11] TOGGLE DRAFTS CHANGE
+   [11] LRC: CARICAMENTO E PARSING
+   ========================================================= */
+async function loadLrc(url) {
+  try {
+    clearLyrics("Caricamento testo...");
+    const resp = await fetch(url);
+    if (!resp.ok) {
+      clearLyrics("Impossibile caricare il testo");
+      return;
+    }
+    const text = await resp.text();
+    parseLrc(text);
+    if (currentLyrics.length === 0) {
+      clearLyrics("Nessun testo valido nel file LRC");
+    } else {
+      currentLyricEl.textContent = "Avvia la riproduzione per vedere il testo...";
+    }
+  } catch (e) {
+    clearLyrics("Errore nel caricamento del testo");
+  }
+}
+
+function clearLyrics(message = "Testo non disponibile") {
+  currentLyrics = [];
+  currentLyricIndex = -1;
+  if (currentLyricEl) currentLyricEl.textContent = message;
+}
+
+function parseLrc(text) {
+  currentLyrics = [];
+  currentLyricIndex = -1;
+
+  const lines = text.split(/\r?\n/);
+
+  const timeRegex = /\[(\d+):(\d+)(?:\.(\d+))?\](.*)/;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    const m = trimmed.match(timeRegex);
+    if (!m) continue;
+
+    const min = parseInt(m[1], 10) || 0;
+    const sec = parseInt(m[2], 10) || 0;
+    const fracStr = m[3] || "0";
+    let frac = parseInt(fracStr, 10) || 0;
+
+    // LRC tipicamente mm:ss.xx (centesimi)
+    let fracSec = fracStr.length === 2 ? frac / 100 : frac / 1000;
+
+    const total = min * 60 + sec + fracSec;
+    const lyricText = m[4].trim();
+
+    if (lyricText.length > 0) {
+      currentLyrics.push({ time: total, text: lyricText });
+    }
+  }
+
+  // ordina per tempo
+  currentLyrics.sort((a, b) => a.time - b.time);
+}
+
+/* =========================================================
+   [12] LRC: SYNC CON AUDIO (TIMEUPDATE)
+   ========================================================= */
+audio.addEventListener("timeupdate", () => {
+  if (!currentLyrics.length || !currentLyricEl) return;
+
+  const t = audio.currentTime;
+  let idx = -1;
+
+  for (let i = 0; i < currentLyrics.length; i++) {
+    if (currentLyrics[i].time <= t) {
+      idx = i;
+    } else {
+      break;
+    }
+  }
+
+  if (idx !== currentLyricIndex) {
+    currentLyricIndex = idx;
+    if (currentLyricIndex === -1) {
+      currentLyricEl.textContent = "";
+    } else {
+      currentLyricEl.textContent = currentLyrics[currentLyricIndex].text;
+    }
+  }
+});
+
+/* =========================================================
+   [13] TOGGLE DRAFTS CHANGE
    ========================================================= */
 showDraftsChk.addEventListener("change", () => {
   applyFilterAndRender();
 });
 
 /* =========================================================
-   [12] AVVIO
+   [14] AVVIO
    ========================================================= */
 loadTracks();
+
+
