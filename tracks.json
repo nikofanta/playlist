@@ -15,7 +15,8 @@
   {
     "title": "Sapore di Indonesia",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/saporediindonesia.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/saporediindonesia.jpg"
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/saporediindonesia.jpg",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/saporediindonesia.lrc"
   },
   {
     "title": "Da Roma a Dubai",
@@ -82,6 +83,7 @@
     "isDraft": true
   }
 ]
+
 
 
 
