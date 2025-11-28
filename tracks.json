@@ -83,18 +83,28 @@
     "isDraft": true
   },
   {
-    "title": "L'ultima Volta Insieme",
-    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/lultimavoltainsieme.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/lultimavoltainsieme.png",
-    "isDraft": true
+    "title": "Non l'ascolterai",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/nonlascolterai.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/nonlascolterai.png",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/nonlascolterai.lrc",
+    "isDraft": false
   },
   {
-    "title": "L'ultima Volta Insieme (Band)",
-    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/lultimavoltainsiemeband.mp3",
-    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/lultimavoltainsieme.png",
-    "isDraft": true
+    "title": "Non l'ascolterai (Band)",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/nonlascolteraiband.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/nonlascolteraiband.png",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/nonlascolteraiband.lrc",
+    "isDraft": false
+  },
+  {
+    "title": "It Belongs to Us",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/itbelongstous.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/itbelongstous.png",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/itbelongstous.lrc",
+    "isDraft": false
   }
 ]
+
 
 
 
