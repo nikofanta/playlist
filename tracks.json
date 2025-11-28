@@ -83,14 +83,14 @@
     "isDraft": true
   },
   {
-    "title": "Non l'ascolterai",
+    "title": "Non L'Ascolterai",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/nonlascolterai.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/nonlascolterai.png",
     "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/nonlascolterai.lrc",
     "isDraft": false
   },
   {
-    "title": "Non l'ascolterai (Band)",
+    "title": "Non L'Ascolterai (Band)",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/nonlascolteraiband.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/nonlascolteraiband.png",
     "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/nonlascolteraiband.lrc",
@@ -104,6 +104,7 @@
     "isDraft": false
   }
 ]
+
 
 
 
