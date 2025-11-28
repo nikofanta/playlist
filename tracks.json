@@ -53,7 +53,8 @@
     "title": "Dream in the Jungle",
     "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/dreaminthejungle.mp3",
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/dreaminthejungle.jpg",
-    "isDraft": true
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/dreaminthejungle.lrc",
+    "isDraft": false
   },
   {
     "title": "E la Canzone che ti dice",
@@ -104,6 +105,7 @@
     "isDraft": false
   }
 ]
+
 
 
 
