@@ -103,8 +103,16 @@
     "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/itbelongstous.png",
     "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/itbelongstous.lrc",
     "isDraft": false
+  },
+  {
+    "title": "It Belongs to Us (duo)",
+    "audio": "https://raw.githubusercontent.com/nikofanta/playlist/main/mp3/itbelongstousduo.mp3",
+    "cover": "https://raw.githubusercontent.com/nikofanta/playlist/main/covers/itbelongstous.png",
+    "lrc": "https://raw.githubusercontent.com/nikofanta/playlist/main/lrc/itbelongstous.lrc",
+    "isDraft": true
   }
 ]
+
 
 
 
