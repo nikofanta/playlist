@@ -6,6 +6,15 @@
   <meta charset="UTF-8">
   <title>Project "fantaMai"</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4DTN0VSWTV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-4DTN0VSWTV');
+  </script>
 </head>
 
 <body>
@@ -32,7 +41,6 @@
       <div class="info">
         <h2 id="currentTitle"></h2>
 
-        <!-- [3.2.1] LYRICS CONTAINER (prev / current / next) -->
         <div id="lyricsContainer" class="lyrics-container">
           <div id="prevLyric" class="lyric-line lyric-prev"></div>
           <div id="currentLyric" class="lyric-line lyric-current">
@@ -48,12 +56,12 @@
 
     <!-- [4.1] CONTROLLI UI PREV/NEXT + DOWNLOAD -->
     <div class="transport">
-      <button id="prevBtn" class="transport-btn" aria-label="Previous track">⏮ Prev</button>
-      <button id="downloadBtn" class="transport-btn" aria-label="Download MP3">⬇ Download</button>
-      <button id="nextBtn" class="transport-btn" aria-label="Next track">Next ⏭</button>
+      <button id="prevBtn" class="transport-btn">⏮ Prev</button>
+      <button id="downloadBtn" class="transport-btn">⬇ Download</button>
+      <button id="nextBtn" class="transport-btn">Next ⏭</button>
     </div>
 
-    <!-- [5] STATUS BAR (loading/buffering) -->
+    <!-- [5] STATUS BAR -->
     <div id="statusBar" class="status-bar">
       <div class="spinner" id="spinner"></div>
       <span id="statusText">Pronto</span>
@@ -76,6 +84,8 @@
   <script src="script.js"></script>
 </body>
 </html>
+
+
 
 
 
